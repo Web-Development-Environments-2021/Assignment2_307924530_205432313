@@ -10,6 +10,20 @@
 
 	<body>
 
+	<section>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header topnav">
+					<ul>
+						<li><a id="welcomeButton" href="#welcome">WELCOME</a></li>
+						<li><a id="registerButton" href="#register">REGISTER</a></li>
+						<li><a id="loginButton" href="#login">LOGIN</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</section>
+
 
 		<div id="score">
 			<label for="lblScore">SCORE:</label>
@@ -29,6 +43,20 @@
 		<div id="game">
 			<canvas id="canvas" height="600" width="600"></canvas>
 		</div>
+
+
+		<div id="home" class="sectionWelcome" style="display:block">
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<input onclick="myFunctionLogin()" class=btnL type="button" value="Login" alt="Login" width="50%">
+			<input onclick="myFunction()" class=btnR type="button" value="Register">
+		</div>
+
 	</body>
 </html>
 
