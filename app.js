@@ -169,9 +169,9 @@ function Draw() {
 	lblTime.value = time_elapsed;
 	calculateCellSize();
 	var monster = new Image();
-	monster.src = "pictures/whiteMonster.jpg";
-	var greenMonster = new Image();
-	greenMonster.src = "pictures/greenMonster.jpg";
+	monster.src = "pictures/knife.jpeg";
+	var ghostMonster = new Image();
+	ghostMonster.src = "pictures/ghost.jpg";
 	var wallPic = new Image();
 	wallPic.src = "pictures/pumpkinWall.jpg";
 	color = getRandomColor();
@@ -241,7 +241,7 @@ function Draw() {
 				context.drawImage(monster, center.x - CellWidth/2, center.y - CellHeight/2);
 			}
 			if (MonstersRHere[i][j] === 8) {
-				context.drawImage(greenMonster, center.x - CellHeight/2, center.y - CellHeight/2);
+				context.drawImage(ghostMonster, center.x - CellHeight/2, center.y - CellHeight/2);
 			}
 
 			else if (board[i][j] === 3 && MonstersRHere[i][j] == 0) {
@@ -413,7 +413,7 @@ function MeetMonster(){
 	lives--;
 	board[shape.i][shape.j] = 0;
 	score = score - 10;
-	clearInterval()
+	clearInterval();
 	setTimeout(continueGameLifeDown, 1500);
 	if(lives==0){
 		window.clearInterval(interval);
@@ -446,7 +446,6 @@ function MeetMonster(){
 
 }
 
-var imageName;
 function displayLifeIcons() {
 	for (var i = 1; i <= lives; i++) {
 		imageName = "#image" + i;
