@@ -16,8 +16,8 @@ var pacmanLeft = false;
 var pacmanUp = false;
 var pacmanDown = false;
 var lives = 5;
-
-
+var pacmanRemain;
+var emptyCell;
 
 
 
@@ -32,7 +32,7 @@ function Start() {
 	score = 0;
 	pac_color = "yellow";
 	var food_remain = 50;
-	var pacman_remain = 1;
+	pacmanRemain = 1;
 	var monster_remain = 4;
 	var remaining_15_pt = 0.3 *food_remain;
 	var remaining_5_pt= 0.6 * food_remain;
@@ -83,27 +83,27 @@ function Start() {
 
 
 	}
-	if(pacman_remain > 0 ){
-		var emptyCell = findRandomEmptyCell(board);
+	if(pacmanRemain > 0 ){
+		emptyCell = findRandomEmptyCell(board);
 		shape.i = emptyCell[0];
 		shape.j = emptyCell[1];
 		board[shape.i][shape.j] = 2;
-		pacman_remain--;
+		pacmanRemain--;
 	}
 	while (remaining_5_pt > 0) {
-		var emptyCell = findRandomEmptyCell(board);
+		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 5;
 		remaining_5_pt--;
 		food_remain--;
 	}
 	while (remaining_15_pt > 0) {
-		var emptyCell = findRandomEmptyCell(board);
+		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 6;
 		remaining_15_pt--;
 		food_remain--;
 	}
 	while (remaining_25_pt > 0) {
-		var emptyCell = findRandomEmptyCell(board);
+		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 3;
 		remaining_25_pt--;
 		food_remain--;
@@ -264,6 +264,14 @@ function Draw() {
 		}
 	}
 }
+
+function clearIntervals() {
+	// window.clearInterval(interval);
+	while(intervals.length > 0) {
+		clearInterval(intervals.pop());
+	}
+}
+
 function getRandomColor() {
 	var letters = '0123456789ABCDEF';
 	var color = '#';
@@ -275,6 +283,7 @@ function getRandomColor() {
 	}
 	return color;
 }
+
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
@@ -310,21 +319,19 @@ function UpdatePosition() {
 	if(board[shape.i][shape.j]){
 		if(board[shape.i][shape.j] ==5 ){
 			score = score+5;
+			document.getElementById("alertString").innerHTML = "You Got 5 points!!";
 		}
 		if (board[shape.i][shape.j] == 6){
 			score = score+15;
+			document.getElementById("alertString").innerHTML = "You Got 15 points!!";
 		}
 		if(board[shape.i][shape.j] ==3){
 			score = score+25;
+			document.getElementById("alertString").innerHTML = "You Got 25 points!!";
 		}
 
-		if (board[shape.i][shape.j]==7){
-			lives--;
-			if(lives==0){
-				window.clearInterval(interval);
-				window.alert("Game completed");
-
-			}
+		if (MonstersRHere[shape.i][shape.j]==7){
+			MeetMonster();
 		}
 	}
 	board[shape.i][shape.j] = 2;
@@ -350,70 +357,106 @@ function UpdateMonsterPosition(){
 				//monster get down
 				if (randomNum === 0 && Math.abs(((i + 1) - shape.i) < Math.abs((i - 1) - shape.i)) && board[i + 1][j] !== 4 && MonstersRHere[i + 1][j] !== 7) {
 					MonstersRHere[i][j] = 0;
-					/*board[i][j] = 0;*/
 					MonstersRHere[i + 1][j] = 7;
-					/*board[i + 1][j] = 7;*/
 					notMove = false;
 				}
 				//monster get up
 				else if (randomNum === 0 && Math.abs(((i + 1) - shape.i) > Math.abs((i - 1) - shape.i)) && board[i - 1][j] !== 4 && MonstersRHere[i - 1][j] !== 7) {
 					MonstersRHere[i][j] = 0;
-					/*board[i][j] = 0;*/
 					MonstersRHere[i - 1][j] = 7;
-					/*board[i-1][j] = 7;*/
 					notMove = false;
 				}
 				//monster get right
 				else if (randomNum === 1 && Math.abs(((j + 1) - shape.j) < Math.abs((j - 1) - shape.j)) && board[i][j + 1] !== 4 && MonstersRHere[i][j + 1] !== 7) {
 					MonstersRHere[i][j] = 0;
-					/*board[i][j] = 0;*/
 					MonstersRHere[i][j + 1] = 7;
-					/*board[i][j+1] = 7;*/
 					notMove = false;
 				}
 				//monster get left
 				else if (randomNum === 1 && Math.abs(((j + 1) - shape.j) > Math.abs((j - 1) - shape.j)) && board[i][j - 1] !== 4 && MonstersRHere[i][j - 1] !==7) {
 					MonstersRHere[i][j] = 0;
-					/*board[i][j] = 0;*/
 					MonstersRHere[i][j - 1] = 7;
-					/*board[i][j-1] = 7;*/
 					notMove = false;
 				} else if (notMove || shape.i == i || shape.j == j) {
 					while (notMove) {
 						var randomMoveIfStack = Math.floor(Math.random() * 4);/*0,1*/
 						if (randomMoveIfStack === 0 && i-1 >= 0 && i-1 <= 14 && board[i - 1][j] !== 4 && MonstersRHere[i - 1][j] !== 7) {
 							MonstersRHere[i][j] = 0;
-							/*board[i][j] = 0;*/
 							MonstersRHere[i - 1][j] = 7;
-							/*board[i-1][j] = 7;*/
 							notMove = false;
 						} else if (randomMoveIfStack === 1  && i+1 >= 0 && i+1 <= 14 && board[i + 1][j] !== 4 && MonstersRHere[i + 1][j] !== 7) {
 							MonstersRHere[i][j] = 0;
-							/*board[i][j] = 0;*/
 							MonstersRHere[i + 1][j] = 7;
-							/*board[i+1][j] = 7;*/
 							notMove = false;
 						}
 						//get right
 						else if (randomMoveIfStack === 2  && j+1 >= 0 && j+1 <= 14 && board[i][j + 1] !== 4 && MonstersRHere[i][j + 1] !== 7) {
 							MonstersRHere[i][j] = 0;
-							/*board[i][j] = 0;*/
 							MonstersRHere[i][j + 1] = 7;
-							/*board[i][j+1] = 7;*/
 							notMove = false;
 						}
 						//get left
 						else if (randomMoveIfStack === 3 && j >0 && board[i][j - 1] !== 4 && MonstersRHere[i][j - 1] !== 7) {
 							MonstersRHere[i][j] = 0;
-							/*board[i][j] = 0;*/
 							MonstersRHere[i][j - 1] = 7;
-							/*board[i][j-1] = 7;*/
 							notMove = false;
 						}
 					}
 				}
 			}
 		}
+	}
+}
+
+function MeetMonster(){
+	removeLifeIcon(lives);
+	lives--;
+	board[shape.i][shape.j] = 0;
+	score = score - 10;
+	clearInterval()
+	setTimeout(continueGameLifeDown, 1500);
+	if(lives==0){
+		window.clearInterval(interval);
+		window.alert("Game completed");
+	}
+	else{
+		pacmanRemain=1;
+		for (var i = 0; i < 15; i++) {
+			for (var j = 0; j < 15; j++) {
+				if(board[i][j] === 2){
+					board[i][j] = 0;
+				}
+				boardMonsters[i][j] = 0;
+				if(num_of_monsters > 0 && ((i === 0 || i === 14) && (j === 0 && j === 14))){
+					boardMonsters[i][j] = 9;
+					num_of_monsters--;
+				}
+			}
+		}
+		if(pacmanRemain > 0 ){
+			emptyCell = findRandomEmptyCell(board);
+			shape.i = emptyCell[0];
+			shape.j = emptyCell[1];
+			board[shape.i][shape.j] = 5;
+			pacmanRemain--;
+		}
+		intervals.push(setInterval(UpdatePosition, 150));
+		intervals.push(setInterval(UpdateMonsterPosition, 500));
+	}
+
+}
+
+var imageName;
+function displayLifeIcons() {
+	for (var i = 1; i <= lives; i++) {
+		imageName = "#image" + i;
+		$(imageName).css("display", "block");
+	}
+}
+
+function removeLifeIcon(i) {
+	if(i > 0) {
+		$(imageName).css("display", "none");
 	}
 }
 
