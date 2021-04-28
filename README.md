@@ -1,4 +1,4 @@
-# Assignment2
+# Assignment2 - Pacman Game
  
 # Created by:
 * Lee Joe Barak Id number 307924530
