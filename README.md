@@ -4,7 +4,7 @@
 * Lee Joe Barak Id number 307924530
 * Barak Yacouel Id number 205432313
 
-# Link to our websyte
+# Link to our website
 
 
 
