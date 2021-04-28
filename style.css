@@ -576,3 +576,15 @@ table.settingsRightPanel{
   color: #240a30;
   border-color: black;
 }
+.sidePanelR{
+  text-align: center;
+  vertical-align: middle;
+  color: #240a30;
+  font-size: 20px;
+}
+.sidePanelRL{
+  text-align: center;
+  vertical-align: middle;
+  color: greenyellow;
+  font-size: 15px;
+}
