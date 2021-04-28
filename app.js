@@ -936,8 +936,15 @@ function UpdatePacmanPosition() {
         audioDeath.play();*/
         CreepyMusic.pause();
         displaySettings();
+        revertMenuPositionToRelative();
         GameCompleted= true;
     }
+}
+
+function revertMenuPositionToRelative(){
+    $("#menu").css("position", "relative");
+    $('#settings').css("margin-top", "40px");
+    $("#bottomFooter").show();
 }
 
 function UpdateClockPosition(){

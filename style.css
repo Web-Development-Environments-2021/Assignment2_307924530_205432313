@@ -452,11 +452,9 @@ input#leftId:focus {
 
 /*###  THE GAME  ####*/
 .gameArea {
-  position: page;
+  position: relative;
   margin-top: 10%;
   margin-bottom: -5%;
- /* width: 1400px;*/
- /* padding-top: 150px;*/
   font-family: "Night Mare", sans-serif;
   overflow: auto; /* Enable scroll if needed */
   display: inline-flex;
@@ -546,27 +544,35 @@ table.settingsRightPanel{
   border: solid black;
   border-width: 0 3px 3px 0;
   display: inline-block;
-  padding: 3px;
+  padding: 4px;
+  color: black;
   border-color: black;
 }
 .right {
   background-image: url('http://www.clker.com/cliparts/7/d/2/1/11949855991300783204arrow-right-seagreen_ben_01.svg.thumb.png');
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
+  color: #240a30;
   border-color: black;
 }
 .left {
+  background-image: url('http://www.clker.com/cliparts/2/8/e/f/11949855951294915841arrow-left-seagreen_benj_01.svg.thumb.png');
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
+  color: #240a30;
   border-color: black;
 }
 .up {
+  background-image: url('http://www.clker.com/cliparts/f/8/f/9/11949856021028737245arrow-up-seagreen_benji__01.svg.thumb.png');
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
+  color: #240a30;
   border-color: black;
 }
 .down {
+  background-image: url('http://www.clker.com/cliparts/1/b/9/c/1194985592838536401arrow-down-seagreen_benj_01.svg.thumb.png');
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
-  color: black;
+  color: #240a30;
+  border-color: black;
 }
