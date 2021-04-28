@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PACMAN</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<!------------------------------- BODY ---------------------------------------------------->
+
+<body>
+<div class='container master' >
+<!--LOGO placed on top area of screen -->
+<section class="topHeader">
+    <div class="logo">
+        <header id="header">
+            <img src="image/logo.jpg" width="150" style="display: inline-block">
+            <label class="developersID"> Lee Joe Barak - 307924530 & Barak Yacouel - 205432313</label>
+        </header>
+    </div>
+</section>
+
+<!-- The "About" Modal -->
+<div id="myModal" class="modal" >
+    <div class="modal-content" >
+        <span id="closeAbout" class="closeAbout">&times;</span> <!-- this is the little X on upper-right corner of modal-->
+        <!-- Modal content -->
+        <div class="clearFix" id="devIds" >Game Developers: Barak Yacouel & Lee Joe Barak </div>
+        <h3>JQuery Plugins used:</h3>
+        Validate plugin<br>
+        JQuery Datepicker
+        <br>
+        <h3>Templates used:</h3>
+        <a href="https://www.w3schools.com/howto/howto_css_fixed_footer.asp" class="modalLinks">w3schools Fixed Footer</a>
+        <br>
+        <a href="https://www.w3schools.com/howto/howto_css_modals.asp" class="modalLinks">w3schools Modal Dialog</a><br>
+        <!-- including custom fonts in our pages: https://www.webdesignerdepot.com/2013/01/how-to-use-any-font-you-like-with-css3/-->
+        <h3>Challenges:</h3>
+        <ul id="challenges">
+            <li> Couldn't figure out how to debug comfortably</li>
+            <li> Understanding JQuery and JavaScript inner works</li>
+            <li> Handling the drawing of the game area and update the page properly </li>
+        </ul>
+    </div>
+</div>
+
+<!--Menu Navigation Bar -->
+<section id="menu">
+    <nav id="navnav" class="navbar ulNav">
+            <ul>
+                <li><a id="welcomeBtn" href="#welcome">Welcome</a></li>
+                <li><a id="registerBtn" href="#register">Register</a></li>
+                <li><a id="loginBtn" href="#login">Login</a></li>
+                <li><a id="myBtn" onclick="aboutModalHandler()" type="button" style="cursor: pointer;" >About</a></li>
+            </ul>
+    </nav>
+</section>
+
+<!-- #welcome -->
+<div id="welcome" class="welcome" style="display:block">
+    <img src="image\welcomeBanner.png" style="position: center; margin-top: 8%; width: 80%">
+    <table style="margin-left: auto; margin-right: auto">
+        <tr>
+            <td>
+            <input onclick="showLogin()" class=loginBtn type="button" value="Login" alt="Login" >
+        </td>
+        </tr>
+        <tr>
+            <td>
+            <input onclick="showRegistration()" class=registerBtn type="button" value="Register">
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- #login -->
+<div id="login" style="display:none">
+    <div id="loginForm" class="login">
+    <table>
+        <tr>
+            <td>
+                <div id="userName">
+                    <input type="text" name="name" id="name" class="register" size="30" placeholder="Username" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="serPassword">
+                    <input type="password" id="userPassword" class="register" size="30" placeholder="Password" required>
+                 </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div style="position: relative ">
+                    <input type="button"  value="Login if you dare" onclick="validateUserPassword()"/>
+                </div>
+            </td>
+        </tr>
+    </table>
+    </div>
+</div>
+
+<!-- #register Form -->
+<div id="register" style="display:none">
+    <h1 class="register">Register</h1>
+    <p class="pleaseFill">Please fill in all fields</p>
+
+    <form class="register" action="#" name="registration">
+        <label for="user_name" class="registerFields">Username :</label>
+        <input type="text" id="user_name" class="register" placeholder="Enter your user name" name="user_name"><br>
+
+        <label for="user_password" class="registerFields">Password :</label>
+        <input type="password" id="user_password" class="register" placeholder="Enter your Password" name="user_password"><br>
+
+        <label for="userFirstName" class="registerFields">Fisrt Name :</label>
+        <input type="text" id="userFirstName" class="register" placeholder="Enter your first name" name="userFirstName"><br>
+
+        <label for="userLastName" class="registerFields">Last Name :</label>
+        <input type="text" id="userLastName" class="register" placeholder="Enter your last name" name="userLastName"><br>
+
+        <label for="userMail" class="registerFields" >Email :</label>
+        <input type="text" id="userMail" class="register" placeholder="Enter your Email" name="userMail"><br>
+
+        <label for="birthday" class="registerFields">Birthdate :</label>
+        <input type="date" id="birthday" class="register" name="birthday"><br>
+        <table>
+            <tr>
+                <td>
+                    <button type="submit">REGISTER</button>
+                </td>
+                <td>
+                    <button type="reset">RESET</button>
+                </td>
+            </tr>
+        </table>
+
+    </form>
+</div>
+
+<!-- #settings Form  -->
+<div>
+    <form id="settings" name="settings" action="#" class="settings" style="display:none">
+        <h1 class="register">Settings</h1>
+        <p class="pleaseFill">You can choose which keys to play with (defaults to arrows)</p>
+        <!--### onkeydown="changeUserKeysValues(event)" ###-->
+       <!-- <input onchange="hideIcon(this);" Placeholder="Search" />--><!-- just for test-->
+        <label for="upId" class="settingsFields">UP :</label>
+        <input id="upId" name="upId" class="settings" type="text" placeholder="arrow-up" onkeydown="changeUserKeysValues(event)"><br>
+        <label for="downId"  class="settingsFields">DOWN :</label>
+        <input id="downId" name="downId" class="settings" type="text" placeholder="arrow-down" onkeydown="changeUserKeysValues(event)"><br>
+        <label for="rightId" class="settingsFields">RIGHT :</label>
+        <input id="rightId" name="rightId" class="settings" type="text" placeholder="arrow-right"  onkeydown="changeUserKeysValues(event)"><br>
+        <label for="leftId" class="settingsFields">LEFT :</label>
+        <input id="leftId" name="leftId" type="text" class="settings" placeholder="arrow-left" onkeydown="changeUserKeysValues(event)"><br>
+
+        <!-- Choose Colors -->
+        <p class="pleaseFill">Choose Colors</p>
+        <label for="ball_5_points"  class="settingsFields">Choose color for 5 points worth :</label>
+        <input type="color" id="ball_5_points" name="ball_5_points" value="#8b4513" ><br>
+        <label for="ball_15_points" class="settingsFields">Choose color for 15 points worth :</label>
+        <input type="color" id="ball_15_points" name="ball_15_points" value="#05ff86" ><br>
+        <label for="ball_25_points"  class="settingsFields">Choose color for 25 points worth :</label>
+        <input type="color" id="ball_25_points" name="ball_25_points" value="#ffbafa" ><br>
+        <p class="pleaseFill">Choose Food, Monsters, Time</p>
+        <!--### Choose Food -->
+        <label for="food" class="settingsFields">How much food do you want? </label>
+        <input id="food" type="number" name="food" min="50" max="90"><br>
+        <!-- Choose Monsters -->
+        <label for="monsters"  class="settingsFields">How many monsters do you want?</label>
+        <input id="monsters" type="number" name="monsters" min="1" max="4"><br>
+        <!-- Choose Time -->
+        <label for="setTime" class="settingsFields">How much time do you want to play? </label>
+        <input id="setTime" name="setTime" type="number" min="60"><br>
+
+
+        <button  type="submit" style="float: left">Submit Choice</button>
+    </form>
+    <button id="random_btn" onclick="randomSetting()"  type="submit" style="display: none">Fill Randomly</button>
+</div>
+<!-- #score_time_life -->
+<section>
+<div id="score_time_life" class="gameArea" style="display: none">
+    <div id="frame">
+        <!-- ALL LEFT SIDE PANEL OF THE GAME-->
+        <div id="leftPanel" style="margin-left: auto">
+            <table>
+                <tr><td> <div id="player_name">
+                    <h1>Player name: <p id="pl_name" style="display: inline-flex"></p></h1>
+                </div></td></tr>
+                <tr><td><div id="lives">
+                    <label>Life Remaining:</label>
+                    <br>
+                    <img id="image1" src='image/tumb.jpeg' style="display: none; float: left">
+                    <img id="image2" src='image/tumb.jpeg' style="display: none; float: left">
+                    <img id="image3" src='image/tumb.jpeg' style="display: none; float: left">
+                    <img id="image4" src='image/tumb.jpeg' style="display: none; float: left">
+                    <img id="image5" src='image/tumb.jpeg' style="display: none; float: left">
+                    <img id="image6" src='image/tumb.jpeg' style="display: none; float: left">
+                </div></td></tr>
+                <tr><td><div id="score">
+                    <label for="lblScore">Score:</label>
+                    <input id="lblScore" class="rightPanel" type="text" size="15"/>
+                </div></td></tr>
+                <tr><td>  <div id="time">
+                    <label for="lblTime">Time:&nbsp;&nbsp;&nbsp;</label>
+                    <input id="lblTime" type="text" class="rightPanel" size="15"/>
+                </div></td></tr>
+                <tr><td><div id="newGame">
+                    <button id="newGame_btn" type="reset" onclick="initGame()" class="gameButtons">New Game</button>
+                </div></td></tr>
+                <tr><td> <div id="music">
+                    <button id="stopSong" type="button" class="gameButtons" onclick="StopCreepySong()">Stop Song</button>
+                    <button id="playSong" type="button" onclick="PlayCreepySong()" class="gameButtons">Play Music</button>
+                </div></td></tr>
+                <tr><td><div id="soundEffect">
+                    <button id="stopEffect" type="button" class="gameButtons" onclick="stopSoundEffect()">Stop Sound
+                        Effect
+                    </button>
+                </div></td></tr>
+            </table>
+        </div>
+        <!-- ALL MIDDLE PANEL - WHERE THE ACTUAL GAME IS -->
+        <div id="game">
+            <canvas id="canvas"  height="600" width="600"></canvas>
+        </div>
+        <!-- ALL RIGHT SIDE PANEL - WHERE WE SHOW THE MOVE-KEYS AND SETTINGS -->
+        <div id="rightPanel">
+            <table  class="settingsRightPanel">
+                <tr>
+                    <td>
+                        <label id="btn_up">Up key:</label>&nbsp;
+                        <p id="up"><i class="arrow up"></i></p>&nbsp;
+                    </td>
+                    <td>
+                        &nbsp;<label id="btn_down">Down key:</label>&nbsp;
+                        <p id="down"><i class="arrow down"></i></p>&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;<label id="btn_right">Right key:</label>&nbsp;
+                        <p id="right"><i class="arrow right"></i></p>&nbsp;
+                    </td>
+                    <td>
+                        &nbsp;<label id="btn_left">Left key:</label>&nbsp;
+                        <p id="left"><i class="arrow left"></i></p>&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="ball_num">NUMBER OF BALLS:</label>&nbsp;
+                        <p id="balls" style="text-align: center; vertical-align: middle;"></p>&nbsp;
+                    </td>
+                    <td>
+                        &nbsp;<label id="game_time" style="text-align: center; vertical-align: middle;">MAX
+                        TIME:</label>&nbsp;
+                        <p id="timePlay" style="text-align: center; vertical-align: middle;"></p>&nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label id="num_monsters">NUMBER OF MONSTERS:</label>
+                        <p id="mons" style="text-align: center; vertical-align: middle;"></p>
+                    </td>
+                </tr>
+            </table>
+            <div id="timeAlert" class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <p id="alertString"></p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- #loading_img -->
+<div id="loading_img" hidden>
+    <img src="image/ezgif.com-gif-maker.gif" alt="loading..." class="center">
+</div>
+<!-- ======================================== -->
+</div> <!-- .master-container -->
+
+</body>
+
+
+<!-- #footer BOTTOM -->
+<footer id="bottomFooter" class="bottomFooter">
+    <p><Strong>developed by: Barak Yacouel <span>barakya@post.bgu.ac.il</span> & Lee Joe Barak <span>leejoe@post.bgu.ac.il</span> </Strong></p>
+</footer>
+</html>
