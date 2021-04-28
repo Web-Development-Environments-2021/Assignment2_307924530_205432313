@@ -570,10 +570,3 @@ table.settingsRightPanel{
   -webkit-transform: rotate(45deg);
   color: black;
 }
-
-.alert {
-  display: none;
-  padding: 15px;
-  background-color: #f44336;
-  color: white;
-}
