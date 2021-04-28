@@ -6,7 +6,7 @@
 
 # Link to our website
 
-
+https://web-development-environments-2021.github.io/Assignment2_307924530_205432313/ 
 
 # Other Functionalities
 * 2 kinds of monsters, each with its own qualities
