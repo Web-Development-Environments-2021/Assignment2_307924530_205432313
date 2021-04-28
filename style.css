@@ -542,8 +542,6 @@ table.settingsRightPanel{
   overflow: auto;
 
 }
-
-/*todo: CHANGE!! */
 .arrow {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -551,33 +549,29 @@ table.settingsRightPanel{
   padding: 3px;
   border-color: black;
 }
-
 .right {
   background-image: url('http://www.clker.com/cliparts/7/d/2/1/11949855991300783204arrow-right-seagreen_ben_01.svg.thumb.png');
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
   border-color: black;
 }
-
 .left {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
   border-color: black;
 }
-
 .up {
   transform: rotate(-135deg);
   -webkit-transform: rotate(-135deg);
   border-color: black;
 }
-
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   color: black;
 }
 
-.alert {/*TODO: WHAT IS THIS? */
+.alert {
   display: none;
   padding: 15px;
   background-color: #f44336;

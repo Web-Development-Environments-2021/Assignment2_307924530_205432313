@@ -37,10 +37,6 @@ var ClockRow;
 var ClockCol;
 var ClockEaten;
 
-function funcExample(p1, p2) {
-    return p1 * p2;   // The function returns the product of p1 and p2
-}
-
 
 /* defult user */
 $(document).ready(function () {
@@ -88,7 +84,7 @@ function hideForWelcomeButtonClicked(){
     $(document.getElementById("login")).hide();
     $(document.getElementById("settings")).hide();
     $("#random_btn").css("display", "none");
-    $('#score_time_life').css('display', 'none');
+    $('#gameAreaDiv').css('display', 'none');
 }
 
 /* ################# LOGIN ##########################*/
@@ -104,7 +100,7 @@ function showLogin() {
     hideForLoginButtonClicked();
     $(document.getElementById("login")).show();
     $("#random_btn").css("display", "none");
-    $('#score_time_life').css('display', 'none');
+    $('#gameAreaDiv').css('display', 'none');
     $("#footer").css("position","fixed");
     clearIntervals();
     CreepyMusic.pause();
@@ -143,7 +139,7 @@ function hideForRegisterButtonClicked(){
     $(document.getElementById("about")).hide();
     $(document.getElementById("login")).hide();
     $(document.getElementById("settings")).hide();
-    $('#score_time_life').css('display', 'none');
+    $('#gameAreaDiv').css('display', 'none');
 }
 /* form[name=settings Handler */
 $(function() {
@@ -182,7 +178,7 @@ $(function() {
         },
         submitHandler: function(form) {
             submitSettingsHandler();
-            initializeGameDesign();/*todo: relace some stuff in initializeGameDesign() */
+            initializeGameDesign();
         },
         invalidHandler: function(form, validator) {
             var errors = validator.numberOfInvalids();
@@ -203,11 +199,11 @@ $(function() {
     });
 });
 
-function submitSettingsHandler(){//Show score_time_life
+function submitSettingsHandler(){//Show gameAreaDiv
     $("#settings").css("display", "none");
     $("#random_btn").css("display", "none");
     $("#menu").css("position", "fixed");
-    $('#score_time_life').css('display', 'block');
+    $('#gameAreaDiv').css('display', 'block');
     displaySettingDuringTheGame();
 }
 
@@ -224,7 +220,7 @@ function initializeGameDesign() {
     calculateCellSize();
     $("#bottomFooter").css("position","relative");
     displaySettingDuringTheGame();
-    initGame(); /*todo: figure out how this is different from initializeGameDesign */
+    initGame();
     //$("#newGame_btn").css("display","block");
 }
 
@@ -367,7 +363,7 @@ function displaySettings() {
     $('#settings').css('display', 'block');
     $("#random_btn").css("display","block");
     $('#game').css('display', 'block');
-    $('#score_time_life').css('display', 'none');
+    $('#gameAreaDiv').css('display', 'none');
 }
 
 
@@ -491,7 +487,7 @@ function hideRegisterForm_and_ShowLoadingImage(){
     $('#register').css('display', 'none');
     $("#loading_img").css("display","block");
     setTimeout(displaySettings,2000);
-    playerName = userMail;/*todo: can i delete this?*/
+    playerName = userMail;
 }
 
 function validateUserPassword() {
@@ -1212,8 +1208,6 @@ function gameOver() {
     return true;
 }
 
-
-/*########### TODO: I'm going to try using those functions to fix the game area so it fits the browser window size! don't erase!*/
 // dynamic weighted footer
 /*
 var watchFooter = function() {
