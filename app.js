@@ -373,14 +373,6 @@ function displaySettings() {
 
 /* form[name=Registration Handler */
 $(function() {
-   /* $.validator.addMethod("lettersonly", function(value, element) {
-        return this.optional(element) || /^[a-z]+$/i.test(value);
-    }, "only letters allowed");
-
-    $.validator.addMethod("alphanumeric", function(value, element) {
-        return this.optional(element) || /^.*(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$/i.test(value);
-    }, "your password must include both letters and numbers");
-*/
     // Initialize form validation on the registration form.
     // It has the name attribute "registration"
     defineRegexForValidate();
